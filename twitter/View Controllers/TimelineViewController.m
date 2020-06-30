@@ -78,7 +78,7 @@
     Tweet *tweet = self.tweetArray[indexPath.row];
     
     cell.nameLabel.text = tweet.user.name;
-    cell.usernameLabel.text = tweet.user.screenName;
+    cell.usernameLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
     cell.dateLabel.text = tweet.createdAtString;
     cell.tweetContent.text = tweet.text;
     cell.likesCountLabel.text = [@(tweet.favoriteCount) stringValue];
