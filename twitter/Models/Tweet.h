@@ -29,12 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 // For Retweets
 @property (nonatomic, strong) User *retweetedByUser;
 
-
-
 // MARK: Methods
++ (NSMutableArray *)tweetsWithArray:(NSArray *)dictionaries;
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-+ (NSMutableArray *)tweetsWithArray:(NSArray *)dictionaries;
 
 
 

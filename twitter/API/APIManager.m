@@ -90,6 +90,20 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 }
 
 
+- (void)updateTweetStatus:(Tweet *)tweet :(NSString *)urlString completion:(void (^)(Tweet *, NSError *))completion {
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+
+
+/*
 - (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
     NSString *urlString = POST_FAVORITE;
     NSDictionary *parameters = @{@"id": tweet.idStr};
@@ -140,7 +154,6 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
         completion(nil, error);
     }];
 }
-
-
+*/
 
 @end

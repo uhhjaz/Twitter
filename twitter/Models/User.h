@@ -17,11 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *screenName;
 @property (nonatomic, strong) NSString *profileImageURLString;
 
-
 // MARK: Methods
-// Create initializer
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSMutableArray *)userWithArray:(NSArray *)dictionaries;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
 
 @end
 
