@@ -108,7 +108,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTS-fv-DaL">
-                                                    <rect key="frame" x="327.5" y="123.5" width="28" height="28"/>
+                                                    <rect key="frame" x="327" y="121.5" width="28" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="28" id="6mI-Ya-jhC"/>
                                                         <constraint firstAttribute="height" constant="28" id="HnC-DD-lyI"/>
@@ -122,13 +122,13 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMh-AW-q0x">
-                                                    <rect key="frame" x="356.5" y="129.5" width="37.5" height="23.5"/>
+                                                    <rect key="frame" x="356" y="125.5" width="38" height="24"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fS-GW-Yw7">
-                                                    <rect key="frame" x="224.5" y="124.5" width="28" height="28"/>
+                                                    <rect key="frame" x="224" y="123.5" width="28" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="28" id="Cxy-Y4-S45"/>
                                                         <constraint firstAttribute="height" constant="28" id="mN2-kS-ewv"/>
@@ -140,7 +140,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retweets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBz-hz-mni">
-                                                    <rect key="frame" x="253.5" y="127" width="70" height="23.5"/>
+                                                    <rect key="frame" x="253.5" y="125.5" width="70" height="24"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -156,15 +156,16 @@
                                                 <constraint firstItem="gNn-MK-p09" firstAttribute="leading" secondItem="fHy-S6-Sdj" secondAttribute="trailing" constant="8" id="Gw5-63-zan"/>
                                                 <constraint firstItem="HTc-6G-yxx" firstAttribute="leading" secondItem="KNn-IU-2bZ" secondAttribute="trailing" constant="11" id="NVN-AG-al9"/>
                                                 <constraint firstItem="sbX-bd-6m4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gNn-MK-p09" secondAttribute="trailing" constant="8" id="XRo-Je-v7m"/>
-                                                <constraint firstItem="rTS-fv-DaL" firstAttribute="top" secondItem="HTc-6G-yxx" secondAttribute="bottom" constant="11" id="aLo-lv-DFX"/>
+                                                <constraint firstItem="rTS-fv-DaL" firstAttribute="centerY" secondItem="0fS-GW-Yw7" secondAttribute="centerY" constant="-2" id="Z9a-6C-eDb"/>
+                                                <constraint firstItem="rTS-fv-DaL" firstAttribute="top" secondItem="HTc-6G-yxx" secondAttribute="bottom" constant="9" id="aLo-lv-DFX"/>
                                                 <constraint firstItem="dMh-AW-q0x" firstAttribute="leading" secondItem="rTS-fv-DaL" secondAttribute="trailing" constant="1" id="dVk-DT-qzj"/>
                                                 <constraint firstItem="WBz-hz-mni" firstAttribute="centerY" secondItem="0fS-GW-Yw7" secondAttribute="centerY" id="gOZ-DE-tuh"/>
                                                 <constraint firstItem="KNn-IU-2bZ" firstAttribute="top" secondItem="iKf-eZ-smr" secondAttribute="top" constant="11" id="ir8-ex-GcC"/>
                                                 <constraint firstAttribute="trailing" secondItem="HTc-6G-yxx" secondAttribute="trailing" constant="11" id="jF2-QC-63r"/>
-                                                <constraint firstItem="rTS-fv-DaL" firstAttribute="top" secondItem="0fS-GW-Yw7" secondAttribute="top" constant="-1" id="ll5-6e-iTU"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="dMh-AW-q0x" secondAttribute="trailing" id="o1i-UD-hU4"/>
+                                                <constraint firstItem="dMh-AW-q0x" firstAttribute="firstBaseline" secondItem="WBz-hz-mni" secondAttribute="firstBaseline" id="qf6-KK-6c0"/>
                                                 <constraint firstItem="HTc-6G-yxx" firstAttribute="top" secondItem="fHy-S6-Sdj" secondAttribute="bottom" constant="8" id="rI0-w1-p8J"/>
-                                                <constraint firstItem="dMh-AW-q0x" firstAttribute="top" secondItem="HTc-6G-yxx" secondAttribute="bottom" constant="17" id="rJj-ys-lrX"/>
+                                                <constraint firstItem="dMh-AW-q0x" firstAttribute="top" secondItem="HTc-6G-yxx" secondAttribute="bottom" constant="13" id="rJj-ys-lrX"/>
                                                 <constraint firstItem="KNn-IU-2bZ" firstAttribute="leading" secondItem="iKf-eZ-smr" secondAttribute="leading" constant="11" id="t0x-e9-IrV"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KNn-IU-2bZ" secondAttribute="bottom" constant="11" id="u5Z-9U-LiP"/>
                                                 <constraint firstItem="fHy-S6-Sdj" firstAttribute="top" secondItem="iKf-eZ-smr" secondAttribute="top" constant="11" id="ulX-VF-ZpO"/>
@@ -215,6 +216,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1659.4202898550725" y="36.160714285714285"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="H1X-gw-Lkk">
+            <objects>
+                <viewController id="Pmw-Yd-3LX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6gm-4U-8IH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="5Zm-BF-Wed"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WJd-x5-YM1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1659" y="819"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="YgL-zJ-Ln2">

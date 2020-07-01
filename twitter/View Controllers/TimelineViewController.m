@@ -37,20 +37,17 @@
     [self.refreshControl addTarget:self action:@selector(getTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
-     
 }
+
 
 - (void)getTweets {
 
         // Get timeline
         [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
             if (tweets) {
-                
                 self.tweetArray = (NSMutableArray *)tweets;
                 
                 NSLog(@"😎😎😎 Successfully loaded home timeline");
-                
-                
                 NSLog(@"%@", self.tweetArray);
                 
                 [self.tableView reloadData];
@@ -60,43 +57,43 @@
             }
             
             [self.refreshControl endRefreshing];
-            
         }];
         
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tweetArray.count;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    // create tweet cell
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
-    
     Tweet *tweet = self.tweetArray[indexPath.row];
+    cell.tweet = tweet;
     
+    // update view labels for tweet
     cell.nameLabel.text = tweet.user.name;
     cell.usernameLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
-
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
-    
     cell.dateLabel.text = tweet.createdAtString;
     cell.tweetContent.text = tweet.text;
     cell.likesCountLabel.text = [@(tweet.favoriteCount) stringValue];
     cell.retweetCountLabel.text = [@(tweet.retweetCount) stringValue];
     
+    // update profile image for tweet
     NSString *profileImageURLString = tweet.user.profileImageURLString;
     NSURL *profileImageURL = [NSURL URLWithString:profileImageURLString];
     [cell.profileImageView setImageWithURL:profileImageURL];
     
-    cell.tweet = tweet;
-    
+    // refresh to update like and retweet status for tweet
     [cell refreshDataForLike];
     [cell refreshDataForRetweet];
 
@@ -109,6 +106,7 @@
     [self.tableView reloadData];
 }
 
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -118,6 +116,7 @@
     composeController.delegate = self;
     
 }
+
 
 - (IBAction)didTapLogout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;

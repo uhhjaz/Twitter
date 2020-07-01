@@ -12,9 +12,16 @@
 static NSString * const baseURLString = @"https://api.twitter.com";
 static NSString * const consumerKey = @"AsY5BuAPXrzUPmnyTe0en9EBR";
 static NSString * const consumerSecret = @"9aiLwKej77fTrRe8pccIQudaFG4fHl0CFoAIDH7UPQ0h2vUbJe";
+static NSString * const GET_HOME_TIMELINE = @"1.1/statuses/home_timeline.json";
+static NSString * const POST_STATUS = @"1.1/statuses/update.json";
+static NSString * const POST_FAVORITE = @"1.1/favorites/create.json";
+static NSString * const POST_UNFAVORITE = @"1.1/favorites/destroy.json";
+static NSString * const POST_RETWEET = @"1.1/statuses/retweet.json";
+static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
+
+
 
 @interface APIManager()
-
 
 @end
 
@@ -54,8 +61,9 @@ static NSString * const consumerSecret = @"9aiLwKej77fTrRe8pccIQudaFG4fHl0CFoAID
 
 
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
+    
     // Create a GET Request
-    [self GET:@"1.1/statuses/home_timeline.json"
+    [self GET:GET_HOME_TIMELINE
         parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
             // Success
             NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
@@ -68,8 +76,9 @@ static NSString * const consumerSecret = @"9aiLwKej77fTrRe8pccIQudaFG4fHl0CFoAID
     
 }
 
+
 - (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{
-    NSString *urlString = @"1.1/statuses/update.json";
+    NSString *urlString = POST_STATUS;
     NSDictionary *parameters = @{@"status": text};
     
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
@@ -80,8 +89,9 @@ static NSString * const consumerSecret = @"9aiLwKej77fTrRe8pccIQudaFG4fHl0CFoAID
     }];
 }
 
+
 - (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
-    NSString *urlString = @"1.1/favorites/create.json";
+    NSString *urlString = POST_FAVORITE;
     NSDictionary *parameters = @{@"id": tweet.idStr};
     
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
@@ -94,7 +104,7 @@ static NSString * const consumerSecret = @"9aiLwKej77fTrRe8pccIQudaFG4fHl0CFoAID
 
 
 - (void)unfavorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
-    NSString *urlString = @"1.1/favorites/destroy.json";
+    NSString *urlString = POST_UNFAVORITE;
     NSDictionary *parameters = @{@"id": tweet.idStr};
     
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
@@ -107,7 +117,7 @@ static NSString * const consumerSecret = @"9aiLwKej77fTrRe8pccIQudaFG4fHl0CFoAID
 
 
 - (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
-    NSString *urlString = @"1.1/statuses/retweet.json";
+    NSString *urlString = POST_RETWEET;
     NSDictionary *parameters = @{@"id": tweet.idStr};
     
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
@@ -118,8 +128,9 @@ static NSString * const consumerSecret = @"9aiLwKej77fTrRe8pccIQudaFG4fHl0CFoAID
     }];
 }
 
+
 - (void)unretweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
-    NSString *urlString = @"1.1/statuses/unretweet.json";
+    NSString *urlString = POST_UNRETWEET;
     NSDictionary *parameters = @{@"id": tweet.idStr};
     
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {

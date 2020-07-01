@@ -13,45 +13,49 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
+
 
 - (IBAction)didTapLike:(id)sender {
-    if (self.tweet.favorited){
-        self.tweet.favorited = NO;
-        self.tweet.favoriteCount -= 1;
-    }
-    else{
+    if (!self.tweet.favorited) {
         self.tweet.favorited = YES;
         self.tweet.favoriteCount += 1;
+        [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+            if(error){
+                 NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
+            }
+        }];
     }
+    else {
+        self.tweet.favorited = NO;
+        self.tweet.favoriteCount -= 1;
+        [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+            if(error){
+                 NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
+            }
+        }];
+    }
+
     [self refreshDataForLike];
+
 }
+
 
 - (IBAction)didTapRetweet:(id)sender {
-    if (self.tweet.retweeted){
-        self.tweet.retweeted = NO;
-        self.tweet.retweetCount -= 1;
-    }
-    else{
+    if (!self.tweet.retweeted) {
         self.tweet.retweeted = YES;
         self.tweet.retweetCount += 1;
-    }
-    [self refreshDataForRetweet];
-}
-
-
-- (void) refreshDataForRetweet {
-    if (self.tweet.retweeted) {
-        self.retweetButton.selected = YES;
-        self.retweetCountLabel.text = [@(self.tweet.retweetCount) stringValue];
-        
         [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
                 NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
@@ -61,52 +65,44 @@
             }
         }];
     }
-    
     else {
-        self.retweetButton.selected = NO;
-        self.retweetCountLabel.text = [@(self.tweet.retweetCount) stringValue];
-        
+        self.tweet.retweeted = NO;
+        self.tweet.retweetCount -= 1;
         [[APIManager shared] unretweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
-                NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
+                    NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
             }
             else{
-                NSLog(@"Successfully unretweeted the following Tweet: %@", tweet.text);
+                    NSLog(@"Successfully unretweeted the following Tweet: %@", tweet.text);
             }
         }];
     }
+
+    [self refreshDataForRetweet];
+}
+
+
+- (void) refreshDataForRetweet {
+    if (self.tweet.retweeted) {
+        self.retweetButton.selected = YES;
+    }
+    else {
+        self.retweetButton.selected = NO;
+    }
+    self.retweetCountLabel.text = [@(self.tweet.retweetCount) stringValue];
     
 }
+
 
 - (void) refreshDataForLike {
     if (self.tweet.favorited) {
         self.likesButton.selected = YES;
-        self.likesCountLabel.text = [@(self.tweet.favoriteCount) stringValue];
-        
-        [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
-            if(error){
-                NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
-            }
-            else{
-                NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
-                
-            }
-        }];
     }
     else {
         self.likesButton.selected = NO;
-        self.likesCountLabel.text = [@(self.tweet.favoriteCount) stringValue];
-        
-        [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
-            if(error){
-                NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
-            }
-            else{
-                NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
 
-            }
-        }];
     }
+    self.likesCountLabel.text = [@(self.tweet.favoriteCount) stringValue];
     
 }
 
