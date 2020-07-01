@@ -13,6 +13,7 @@
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "DateTools.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -81,6 +82,10 @@
     
     cell.nameLabel.text = tweet.user.name;
     cell.usernameLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    
     cell.dateLabel.text = tweet.createdAtString;
     cell.tweetContent.text = tweet.text;
     cell.likesCountLabel.text = [@(tweet.favoriteCount) stringValue];
