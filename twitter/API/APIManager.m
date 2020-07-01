@@ -102,7 +102,6 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 }
 
 
-
 /*
 - (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
     NSString *urlString = POST_FAVORITE;

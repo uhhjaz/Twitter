@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "DateTools.h"
+#import "TweetDetailsViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -25,6 +26,10 @@
 
 @implementation TimelineViewController
 
+- (void)viewDidAppear:(BOOL)animated {
+    [self getTweets];
+}
+ 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -77,6 +82,7 @@
     // create tweet cell
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.tweetArray[indexPath.row];
+    [cell setTweet:tweet];
     cell.tweet = tweet;
     
     // update view labels for tweet
@@ -109,10 +115,20 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"composeSegue"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    }
     
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
+    else if ([segue.identifier isEqualToString:@"detailSegue"]){
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet *tweet = self.tweetArray[indexPath.row];
+        
+        TweetDetailsViewController *vc = [segue destinationViewController];
+        vc.tweet = tweet;
+    }
     
 }
 

@@ -1,28 +1,60 @@
 //
-//  TweetCell.m
+//  TweetDetailsViewController.m
 //  twitter
 //
-//  Created by Jasdeep Gill on 6/29/20.
+//  Created by Jasdeep Gill on 6/30/20.
 //  Copyright © 2020 Emerson Malca. All rights reserved.
 //
 
+#import "TweetDetailsViewController.h"
+#import "UIImageView+AFNetworking.h"
 #import "TweetCell.h"
+#import "Tweet.h"
 #import "APIManager.h"
+
+@interface TweetDetailsViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *defaultPictureView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tweetContentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *retweetButton;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
+
+
+@end
 
 static NSString * const POST_FAVORITE = @"1.1/favorites/create.json";
 static NSString * const POST_UNFAVORITE = @"1.1/favorites/destroy.json";
 static NSString * const POST_RETWEET = @"1.1/statuses/retweet.json";
 static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 
-@implementation TweetCell
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
+@implementation TweetDetailsViewController
 
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    // update view labels for tweet
+    self.nameLabel.text = self.tweet.user.name;
+    self.usernameLabel.text = [@"@" stringByAppendingString:self.tweet.user.screenName];
+    self.dateLabel.text = self.tweet.createdAtString;
+    self.tweetContentLabel.text = self.tweet.text;
+    self.likeCountLabel.text = [@(self.tweet.favoriteCount) stringValue];
+    self.retweetCountLabel.text = [@(self.tweet.retweetCount) stringValue];
+
+    
+
+    // update profile image for tweet
+    NSString *profileImageURLString = self.tweet.user.profileImageURLString;
+    NSURL *profileImageURL = [NSURL URLWithString:profileImageURLString];
+    [self.defaultPictureView setImageWithURL:profileImageURL];
+    
+    // refresh to update like and retweet status for tweet
+    [self refreshDataForLike];
+    [self refreshDataForRetweet];
 }
 
 
@@ -53,7 +85,6 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
     }
 
     [self refreshDataForLike];
-
 }
 
 
@@ -101,14 +132,25 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 
 - (void) refreshDataForLike {
     if (self.tweet.favorited) {
-        self.likesButton.selected = YES;
+        self.likeButton.selected = YES;
     }
     else {
-        self.likesButton.selected = NO;
+        self.likeButton.selected = NO;
 
     }
-    self.likesCountLabel.text = [@(self.tweet.favoriteCount) stringValue];
+    self.likeCountLabel.text = [@(self.tweet.favoriteCount) stringValue];
 }
 
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end
