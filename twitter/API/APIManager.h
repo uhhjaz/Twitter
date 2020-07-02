@@ -18,6 +18,6 @@
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion;
 - (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion;
 - (void)updateTweetStatus:(Tweet *)tweet :(NSString *)endpointUrlString completion:(void (^)(Tweet *, NSError *))completion;
-- (void)getUserProfile:(void(^)(User *theUser, NSError *error))completion;
-
+- (void)getUserProfile:(NSString *)idString completion:(void(^)(User *theUser, NSError *error))completion;
+- (void)getMyProfile:(void(^)(User *theUser, NSError *error))completion;
 @end

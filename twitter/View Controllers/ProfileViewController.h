@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
+#import "Tweet.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+
 @interface ProfileViewController : UIViewController
 
+@property (nonatomic, strong) NSString *currentUserID;
+
+- (void)getViewData;
+
 @end
+
 
 NS_ASSUME_NONNULL_END

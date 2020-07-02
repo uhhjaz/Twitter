@@ -118,8 +118,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KNn-IU-2bZ">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KNn-IU-2bZ">
                                                     <rect key="frame" x="11" y="11" width="65" height="65"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" button="YES" image="YES" allowsDirectInteraction="YES"/>
+                                                    </accessibility>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65" id="Faf-oZ-kXa"/>
                                                         <constraint firstAttribute="height" constant="65" id="f2Z-UJ-Nd0"/>
@@ -230,16 +234,16 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="cKe-wn-VUL" id="p3f-4l-7ZZ"/>
+                        <segue destination="F9V-sG-u9t" kind="show" identifier="profileSegue" id="kP5-cX-Lcp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2569.5652173913045" y="36.160714285714285"/>
+            <point key="canvasLocation" x="2600" y="40"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Vbe-6o-xZD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lp6-t4-298" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController modalPresentationStyle="fullScreen" id="F9V-sG-u9t" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EPa-XA-6P2" customClass="ProfileView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -353,8 +357,9 @@
                         <outlet property="profileView" destination="EPa-XA-6P2" id="eYS-PK-qif"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lp6-t4-298" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1356.521739130435" y="1678.7946428571429"/>
+            <point key="canvasLocation" x="1346" y="1238"/>
         </scene>
         <!--Tweet Details View Controller-->
         <scene sceneID="H1X-gw-Lkk">
@@ -519,7 +524,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WJd-x5-YM1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2568.1159420289855" y="805.58035714285711"/>
+            <point key="canvasLocation" x="2601" y="1003"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="YgL-zJ-Ln2">
@@ -619,7 +624,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ja8-ly-XPP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="519" y="1679"/>
+            <point key="canvasLocation" x="397" y="1238"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sgV-gL-TPh">
@@ -640,6 +645,9 @@
             <point key="canvasLocation" x="-1957.9710144927537" y="448.66071428571428"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="kP5-cX-Lcp"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
         <image name="close-icon" width="26" height="24"/>

@@ -12,7 +12,7 @@
 static NSString * const baseURLString = @"https://api.twitter.com";
 static NSString * const consumerKey = @"AsY5BuAPXrzUPmnyTe0en9EBR";
 static NSString * const consumerSecret = @"9aiLwKej77fTrRe8pccIQudaFG4fHl0CFoAIDH7UPQ0h2vUbJe";
-static NSString * const GET_HOME_TIMELINE = @"1.1/statuses/home_timeline.json";
+static NSString * const GET_HOME_TIMELINE = @"1.1/statuses/home_timeline.json?tweet_mode=extended";
 static NSString * const POST_STATUS = @"1.1/statuses/update.json";
 static NSString * const POST_FAVORITE = @"1.1/favorites/create.json";
 static NSString * const POST_UNFAVORITE = @"1.1/favorites/destroy.json";
@@ -77,9 +77,25 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 }
 
 
-- (void)getUserProfile:(void(^)(User *theUser, NSError *error))completion {
+- (void)getMyProfile:(void(^)(User *theUser, NSError *error))completion {
     
-    NSDictionary *parameters = @{@"id": @"1277622212862730240" };
+    // Create a GET Request
+    [self GET:@"1.1/account/verify_credentials.json"
+        parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {
+            // Success
+            User *user  = [[User alloc] initWithDictionary:userDictionary];
+            NSLog(@"%@",user);
+            completion(user, nil);
+        
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // There was a problem
+            completion(nil, error);
+    }];
+}
+
+- (void)getUserProfile:(NSString *)idString completion:(void(^)(User *theUser, NSError *error))completion {
+    
+    NSDictionary *parameters = @{@"id": idString};
     // Create a GET Request
     [self GET:@"1.1/users/show.json"
         parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {

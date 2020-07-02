@@ -14,27 +14,78 @@
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet ProfileView *profileView;
-@property (strong, nonatomic) User *theUser;
+@property (nonatomic, strong) User *theUser;
+
 @end
 
 
 @implementation ProfileViewController
 
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if(self.currentUserID == nil){
+    
+        [[APIManager shared] getMyProfile:^(User *theUser, NSError *error) {
+            if (theUser) {
+                NSLog(@"😎😎😎 Successfully loaded your profile timeline");
+
+                self.theUser = theUser;
+                [self getViewData];
+            }
+            else {
+                NSLog(@"😫😫😫 Error getting your profile timeline: %@", error.localizedDescription);
+            }
+        }];
+    }
+    else {
+        NSString * theUserID = self.currentUserID;
+        [[APIManager shared] getUserProfile:theUserID completion:^(User *theUser, NSError *error) {
+            if (theUser) {
+                NSLog(@"😎😎😎 Successfully loaded another users profile timeline");
+
+                self.theUser = theUser;
+                [self getViewData];
+            }
+            else {
+                NSLog(@"😫😫😫 Error getting another users profile timeline: %@", error.localizedDescription);
+            }
+        }];
+    }
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[APIManager shared] getUserProfile:^(User *theUser, NSError *error) {
-        if (theUser) {
-            NSLog(@"😎😎😎 Successfully loaded home timeline");
+    if(self.currentUserID == nil){
+    
+        [[APIManager shared] getMyProfile:^(User *theUser, NSError *error) {
+            if (theUser) {
+                NSLog(@"😎😎😎 Successfully loaded your profile timeline");
 
-            self.theUser = theUser;
-            [self getViewData];
-        }
-        else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-        }
-    }];
+                self.theUser = theUser;
+                [self getViewData];
+            }
+            else {
+                NSLog(@"😫😫😫 Error getting your profile timeline: %@", error.localizedDescription);
+            }
+        }];
+    }
+    else {
+        NSString * theUserID = self.currentUserID;
+        [[APIManager shared] getUserProfile:theUserID completion:^(User *theUser, NSError *error) {
+            if (theUser) {
+                NSLog(@"😎😎😎 Successfully loaded another users profile timeline");
+
+                self.theUser = theUser;
+                [self getViewData];
+            }
+            else {
+                NSLog(@"😫😫😫 Error getting another users profile timeline: %@", error.localizedDescription);
+            }
+        }];
+    }
 }
 
 

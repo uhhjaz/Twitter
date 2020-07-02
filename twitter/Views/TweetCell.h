@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
+#import "TweetCell.h"
+#import "User.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol TweetCellDelegate;
 @interface TweetCell : UITableViewCell
 
+
+@property (nonatomic, weak) id<TweetCellDelegate> delegate;
 // MARK: Properties
 @property (strong, nonatomic) Tweet *tweet;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -33,6 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) refreshDataForRetweet;
 
 
+@end
+
+@protocol TweetCellDelegate
+// TODO: Add required methods the delegate needs to implement
+- (void)tweetCell:(TweetCell *) tweetCell didTap: (User *)user;
 @end
 
 NS_ASSUME_NONNULL_END

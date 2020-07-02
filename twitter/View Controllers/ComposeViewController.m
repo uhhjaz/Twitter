@@ -29,13 +29,15 @@
 
 
 - (IBAction)tweetAction:(id)sender {
-    NSString *tweetContent = self.composeTweetView.text;
     
+    NSString *tweetContent = self.composeTweetView.text;
+    NSLog(@"%@", tweetContent);
     [[APIManager shared] postStatusWithText:tweetContent completion:^(Tweet *tweets, NSError *error) {
     
         if (tweets) {
         
             [self dismissViewControllerAnimated:true completion:nil];
+            
             [self.delegate didTweet:tweets];
             NSLog(@"😎😎😎 Successfully posted tweet");
         

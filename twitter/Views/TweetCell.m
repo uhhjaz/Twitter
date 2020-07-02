@@ -19,11 +19,19 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImageView addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profileImageView setUserInteractionEnabled:YES];
+    
 }
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
+
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate tweetCell:self didTap:self.tweet.user];
 }
 
 
@@ -56,6 +64,8 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
     [self refreshDataForLike];
 
 }
+
+
 
 
 - (IBAction)didTapRetweet:(id)sender {
