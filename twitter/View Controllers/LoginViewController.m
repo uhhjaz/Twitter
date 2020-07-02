@@ -8,12 +8,15 @@
 
 #import "LoginViewController.h"
 #import "APIManager.h"
+#import "AppDelegate.h"
+
 
 @interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,13 +30,21 @@
 
 - (IBAction)didTapLogin:(id)sender {
     [[APIManager shared] loginWithCompletion:^(BOOL success, NSError *error) {
+        
         if (success) {
-            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-        } else {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UINavigationController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+            AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [app changeRootViewController:mainTabBarController :YES];
+        }
+        else {
             NSLog(@"%@", error.localizedDescription);
         }
+        
     }];
+    
 }
+
 
 /*
 #pragma mark - Navigation

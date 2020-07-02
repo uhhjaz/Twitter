@@ -26,10 +26,12 @@
 
 @implementation TimelineViewController
 
+
 - (void)viewDidAppear:(BOOL)animated {
     [self getTweets];
 }
  
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,9 +48,10 @@
 
 
 - (void)getTweets {
-
+        
         // Get timeline
         [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+            
             if (tweets) {
                 self.tweetArray = (NSMutableArray *)tweets;
                 
@@ -56,14 +59,13 @@
                 NSLog(@"%@", self.tweetArray);
                 
                 [self.tableView reloadData];
-                
-            } else {
+            }
+            else {
                 NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
             }
-            
             [self.refreshControl endRefreshing];
-        }];
         
+        }];
 }
 
 
@@ -135,10 +137,10 @@
 
 - (IBAction)didTapLogout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"];
     appDelegate.window.rootViewController = loginViewController;
+    
     [[APIManager shared] logout];
     
 }

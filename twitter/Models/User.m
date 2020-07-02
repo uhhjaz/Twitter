@@ -13,13 +13,22 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
+   
     if (self) {
         self.name = dictionary[@"name"];
         self.screenName = dictionary[@"screen_name"];
-        
+        NSLog(@"%@", self.name);
         // Initialize any other properties
         self.profileImageURLString = dictionary[@"profile_image_url_https"];
-        
+        self.descriptionTag = dictionary[@"description"];
+
+        self.followerCount = [dictionary[@"followers_count"] stringValue];
+        self.followingCount = [dictionary[@"friends_count"] stringValue];
+        self.retweetCount = [dictionary[@"statuses_count"] stringValue];
+        self.profileBannerURLString = dictionary[@"profile_banner_url"];
+        self.userID = dictionary[@"id_str"];
+        NSLog(@"%@", self.userID);
+        NSLog(@"%@", self.screenName);
         
     }
     return self;

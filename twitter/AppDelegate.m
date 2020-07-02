@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "APIManager.h"
+#import "BDBOAuth1SessionManager.h"
 
 @interface AppDelegate ()
 
@@ -20,13 +21,25 @@
     
     if ([[APIManager shared] isAuthorized]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"TweetsNavigationController"];
-        self.window.rootViewController = navigationController;
+          
+        // if user is logged in before
+        if ([APIManager shared].session){
+            UINavigationController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+            self.window.rootViewController = mainTabBarController;
+        }
+        // if user has not logged in before
+        else {
+            UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"];
+            self.window.rootViewController = navigationController;
+        }
     }
     
     return YES;
 }
 
+- (void)changeRootViewController:(UIViewController*)vc :(BOOL)animated {
+    self.window.rootViewController = vc;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

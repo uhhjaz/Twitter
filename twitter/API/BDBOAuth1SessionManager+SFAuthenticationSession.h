@@ -7,6 +7,8 @@
 //
 
 #import "BDBOAuth1SessionManager.h"
+#import "BDBOAuth1SessionManager+SFAuthenticationSession.h"
+#import <objc/message.h>
 
 @interface BDBOAuth1SessionManager (SFAuthenticationSession)
 
@@ -49,5 +51,6 @@
  @return YES if an access token was found and removed from the keychain, NO otherwise.
  */
 - (BOOL)logout;
+
 
 @end

@@ -36,7 +36,7 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     // update view labels for tweet
     self.nameLabel.text = self.tweet.user.name;
     self.usernameLabel.text = [@"@" stringByAppendingString:self.tweet.user.screenName];
@@ -44,8 +44,6 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
     self.tweetContentLabel.text = self.tweet.text;
     self.likeCountLabel.text = [@(self.tweet.favoriteCount) stringValue];
     self.retweetCountLabel.text = [@(self.tweet.retweetCount) stringValue];
-
-    
 
     // update profile image for tweet
     NSString *profileImageURLString = self.tweet.user.profileImageURLString;
@@ -59,6 +57,7 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 
 
 - (IBAction)didTapLike:(id)sender {
+    
     if (!self.tweet.favorited) {
         self.tweet.favorited = YES;
         self.tweet.favoriteCount += 1;
@@ -140,7 +139,6 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
     }
     self.likeCountLabel.text = [@(self.tweet.favoriteCount) stringValue];
 }
-
 
 
 /*

@@ -16,6 +16,7 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 
 @implementation TweetCell
 
+
 - (void)awakeFromNib {
     [super awakeFromNib];
 }
@@ -31,10 +32,10 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
         self.tweet.favorited = YES;
         self.tweet.favoriteCount += 1;
         [[APIManager shared] updateTweetStatus:self.tweet :POST_FAVORITE completion:^(Tweet *tweet, NSError *error) {
-            if(error){
+            if (error) {
                     NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
             }
-            else{
+            else {
                     NSLog(@"Successfully unretweeted the following Tweet: %@", tweet.text);
             }
         }];
@@ -43,10 +44,10 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
         self.tweet.favorited = NO;
         self.tweet.favoriteCount -= 1;
         [[APIManager shared] updateTweetStatus:self.tweet :POST_UNFAVORITE completion:^(Tweet *tweet, NSError *error) {
-            if(error){
+            if (error) {
                     NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
             }
-            else{
+            else {
                     NSLog(@"Successfully unretweeted the following Tweet: %@", tweet.text);
             }
         }];
@@ -62,10 +63,10 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
         self.tweet.retweeted = YES;
         self.tweet.retweetCount += 1;
         [[APIManager shared] updateTweetStatus:self.tweet :POST_RETWEET completion:^(Tweet *tweet, NSError *error) {
-            if(error){
+            if (error) {
                     NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
             }
-            else{
+            else {
                     NSLog(@"Successfully unretweeted the following Tweet: %@", tweet.text);
             }
         }];
@@ -74,10 +75,10 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
         self.tweet.retweeted = NO;
         self.tweet.retweetCount -= 1;
         [[APIManager shared] updateTweetStatus:self.tweet :POST_UNRETWEET completion:^(Tweet *tweet, NSError *error) {
-            if(error){
+            if (error) {
                     NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
             }
-            else{
+            else {
                     NSLog(@"Successfully unretweeted the following Tweet: %@", tweet.text);
             }
         }];
