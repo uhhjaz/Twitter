@@ -18,7 +18,8 @@ static NSString * const POST_FAVORITE = @"1.1/favorites/create.json";
 static NSString * const POST_UNFAVORITE = @"1.1/favorites/destroy.json";
 static NSString * const POST_RETWEET = @"1.1/statuses/retweet.json";
 static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
-
+static NSString * const GET_USER_SELF = @"1.1/account/verify_credentials.json";
+static NSString * const GET_USER = @"1.1/users/show.json";
 
 
 @interface APIManager()
@@ -26,6 +27,7 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 @end
 
 @implementation APIManager
+
 
 + (instancetype)shared {
     static APIManager *sharedManager = nil;
@@ -80,7 +82,7 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
 - (void)getMyProfile:(void(^)(User *theUser, NSError *error))completion {
     
     // Create a GET Request
-    [self GET:@"1.1/account/verify_credentials.json"
+    [self GET:GET_USER_SELF
         parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {
             // Success
             User *user  = [[User alloc] initWithDictionary:userDictionary];
@@ -93,11 +95,12 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
     }];
 }
 
+
 - (void)getUserProfile:(NSString *)idString completion:(void(^)(User *theUser, NSError *error))completion {
     
     NSDictionary *parameters = @{@"id": idString};
     // Create a GET Request
-    [self GET:@"1.1/users/show.json"
+    [self GET:GET_USER
         parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {
             // Success
             User *user  = [[User alloc] initWithDictionary:userDictionary];
@@ -109,6 +112,7 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
             completion(nil, error);
     }];
 }
+
 
 - (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{
     NSString *urlString = POST_STATUS;

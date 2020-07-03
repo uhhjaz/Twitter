@@ -30,6 +30,7 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
     [super setSelected:selected animated:animated];
 }
 
+
 - (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
     [self.delegate tweetCell:self didTap:self.tweet.user];
 }
@@ -64,8 +65,6 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
     [self refreshDataForLike];
 
 }
-
-
 
 
 - (IBAction)didTapRetweet:(id)sender {

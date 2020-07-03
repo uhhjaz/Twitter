@@ -37,7 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) refreshDataForLike;
 - (void) refreshDataForRetweet;
 
-
 @end
 
 @protocol TweetCellDelegate

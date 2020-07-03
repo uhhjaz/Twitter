@@ -28,8 +28,8 @@
 @implementation TimelineViewController
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [self getTweets];
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
  
 
@@ -127,6 +127,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"composeSegue"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
@@ -147,7 +148,7 @@
         ProfileViewController *profileViewController = [segue destinationViewController];
         profileViewController.currentUserID = user.userID;
     }
-    
+
 }
 
 

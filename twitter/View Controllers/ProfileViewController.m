@@ -24,42 +24,17 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if(self.currentUserID == nil){
-    
-        [[APIManager shared] getMyProfile:^(User *theUser, NSError *error) {
-            if (theUser) {
-                NSLog(@"😎😎😎 Successfully loaded your profile timeline");
-
-                self.theUser = theUser;
-                [self getViewData];
-            }
-            else {
-                NSLog(@"😫😫😫 Error getting your profile timeline: %@", error.localizedDescription);
-            }
-        }];
-    }
-    else {
-        NSString * theUserID = self.currentUserID;
-        [[APIManager shared] getUserProfile:theUserID completion:^(User *theUser, NSError *error) {
-            if (theUser) {
-                NSLog(@"😎😎😎 Successfully loaded another users profile timeline");
-
-                self.theUser = theUser;
-                [self getViewData];
-            }
-            else {
-                NSLog(@"😫😫😫 Error getting another users profile timeline: %@", error.localizedDescription);
-            }
-        }];
-    }
+    [self getUsersProfile];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self getUsersProfile];
+}
+
+- (void)getUsersProfile {
     if(self.currentUserID == nil){
-    
         [[APIManager shared] getMyProfile:^(User *theUser, NSError *error) {
             if (theUser) {
                 NSLog(@"😎😎😎 Successfully loaded your profile timeline");
