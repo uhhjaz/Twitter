@@ -110,6 +110,8 @@
     NSURL *profileImageURL = [NSURL URLWithString:profileImageURLString];
     [self.profileView.defaultPictureView setImageWithURL:profileImageURL];
     
+    self.profileView.defaultPictureViewBg.layer.cornerRadius = self.profileView.defaultPictureViewBg.frame.size.height / 2;
+    self.profileView.defaultPictureView.layer.cornerRadius = self.profileView.defaultPictureView.frame.size.height / 2;
 }
 
 

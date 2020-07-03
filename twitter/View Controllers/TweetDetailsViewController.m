@@ -49,6 +49,7 @@ static NSString * const POST_UNRETWEET = @"1.1/statuses/unretweet.json";
     NSString *profileImageURLString = self.tweet.user.profileImageURLString;
     NSURL *profileImageURL = [NSURL URLWithString:profileImageURLString];
     [self.defaultPictureView setImageWithURL:profileImageURL];
+    self.defaultPictureView.layer.cornerRadius = self.defaultPictureView.frame.size.height / 2;
     
     // refresh to update like and retweet status for tweet
     [self refreshDataForLike];

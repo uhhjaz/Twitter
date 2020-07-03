@@ -19,12 +19,12 @@
         self.screenName = dictionary[@"screen_name"];
         NSLog(@"%@", self.name);
         // Initialize any other properties
-        self.profileImageURLString = dictionary[@"profile_image_url_https"];
+        self.profileImageURLString = [dictionary[@"profile_image_url_https"] stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
         self.descriptionTag = dictionary[@"description"];
 
-        self.followerCount = [dictionary[@"followers_count"] stringValue];
-        self.followingCount = [dictionary[@"friends_count"] stringValue];
-        self.retweetCount = [dictionary[@"statuses_count"] stringValue];
+        self.followerCount = [self suffixNumber:dictionary[@"followers_count"]];
+        self.followingCount = [self suffixNumber:dictionary[@"friends_count"]];
+        self.retweetCount = [self suffixNumber:dictionary[@"statuses_count"]];
         self.profileBannerURLString = dictionary[@"profile_banner_url"];
         self.userID = dictionary[@"id_str"];
         NSLog(@"%@", self.userID);
@@ -41,6 +41,27 @@
         [users addObject:userDictionary];
     }
     return users;
+}
+
+-(NSString*) suffixNumber:(NSNumber*)number{
+    if (!number) {
+        return @"";
+    }
+    long long num = [number longLongValue];
+    int s = ( (num < 0) ? -1 : (num > 0) ? 1 : 0 );
+    
+    NSString* sign = (s == -1 ? @"-" : @"" );
+    num = llabs(num);
+
+    if (num < 1000) {
+        return [NSString stringWithFormat:@"%@%lld",sign,num];
+    }
+    
+    int exp = (int) (log10l(num) / 3.f);
+
+    NSArray* units = @[@"K",@"M"];
+
+    return [NSString stringWithFormat:@"%@%.1f%@",sign, (num / pow(1000, exp)), [units objectAtIndex:(exp-1)]];
 }
 
 @end

@@ -101,6 +101,7 @@
     NSString *profileImageURLString = tweet.user.profileImageURLString;
     NSURL *profileImageURL = [NSURL URLWithString:profileImageURLString];
     [cell.profileImageView setImageWithURL:profileImageURL];
+    cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.size.height / 2;
     
     // refresh to update like and retweet status for tweet
     [cell refreshDataForLike];
