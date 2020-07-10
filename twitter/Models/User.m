@@ -29,8 +29,8 @@
         self.userID = dictionary[@"id_str"];
         NSLog(@"%@", self.userID);
         NSLog(@"%@", self.screenName);
-        
     }
+    
     return self;
 }
 
